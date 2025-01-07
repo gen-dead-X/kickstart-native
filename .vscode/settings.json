@@ -1,0 +1,4 @@
+{
+  "biome.enabled": false,
+  "java.compile.nullAnalysis.mode": "automatic"
+}
