@@ -22,22 +22,23 @@ function App(): React.JSX.Element {
   const [isDarkMode, setIsDarkMode] = React.useState(false);
 
   const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+    backgroundColor: isDarkMode ? 'black' : Colors.lighter,
   };
 
   return (
-    <SafeAreaView className="flex-1">
+    <SafeAreaView
+      className={`flex-1 ${isDarkMode ? 'bg-stone-900' : 'bg-white'}`}>
       <StatusBar
         barStyle={isDarkMode ? 'light-content' : 'dark-content'}
         backgroundColor={backgroundStyle.backgroundColor}
       />
       <View
         className={`flex-1 justify-center items-center ${
-          isDarkMode ? 'bg-[#131313]' : 'bg-white'
+          isDarkMode ? 'bg-stone-900' : 'bg-white'
         }`}>
         <Text
           className={`${
-            isDarkMode ? 'text-teal-200' : 'text-teal-900'
+            isDarkMode ? 'text-sky-200' : 'text-sky-700'
           } text-center font-bold text-4xl`}>
           Hello Tailwind
         </Text>
@@ -45,7 +46,7 @@ function App(): React.JSX.Element {
         {/* Theme Toggle Button */}
         <TouchableOpacity
           className={`w-20 ${
-            isDarkMode ? 'bg-gray-700' : 'bg-blue-300 '
+            isDarkMode ? 'bg-gray-700' : 'bg-blue-300'
           } p-2 rounded-[2rem] mt-5`}
           onPress={() => setIsDarkMode(!isDarkMode)}>
           <View
