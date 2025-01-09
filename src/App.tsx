@@ -5,6 +5,10 @@
  * @format
  */
 
+if (__DEV__) {
+  require('../ReactotronConfig.js');
+}
+
 import '../global.css';
 
 import React, {useEffect} from 'react';
