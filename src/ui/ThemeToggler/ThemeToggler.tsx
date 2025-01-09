@@ -36,9 +36,11 @@ export default function ThemeToggler() {
 
   return (
     <>
-      <Pressable onPress={openBottomSheet} style={[styles.trigger]}>
-        <Text>Change Theme</Text>
-      </Pressable>
+      <TouchableOpacity
+        onPress={openBottomSheet}
+        className="px-4 py-2 bg-blue-200 rounded-full dark:bg-blue-500">
+        <Text className="dark:text-white">Change Theme</Text>
+      </TouchableOpacity>
 
       {isBottomSheetOpen && (
         <TouchableWithoutFeedback
@@ -75,12 +77,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 16,
   },
-  trigger: {
-    padding: 12,
-    backgroundColor: '#eee',
-    borderRadius: 8,
-    alignItems: 'center',
-  },
+
   title: {
     fontSize: 18,
     fontWeight: 'bold',

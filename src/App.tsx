@@ -28,7 +28,7 @@ import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import useThemeHandler from './hooks/useThemeHandler';
 
 function App(): React.JSX.Element {
-  const {theme, setTheme} = useThemeHandler();
+  const {theme} = useThemeHandler();
 
   /* Import State Hooks */
   const bears = useStore((state: StoreState) => state.bears);
@@ -53,7 +53,7 @@ function App(): React.JSX.Element {
           dark:bg-stone-900 bg-white
         `}>
           <Text
-            className={`dark:text-sky-200' text-sky-700
+            className={`dark:text-sky-500 text-sky-300
           text-center font-bold text-4xl`}>
             🧸 Count: {bears}
           </Text>
