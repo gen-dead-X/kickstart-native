@@ -26,6 +26,7 @@ import config from './config/config';
 import ThemeToggler from './ui/ThemeToggler/ThemeToggler';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import useThemeHandler from './hooks/useThemeHandler';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 function App(): React.JSX.Element {
   const {theme} = useThemeHandler();
@@ -49,39 +50,53 @@ function App(): React.JSX.Element {
 
       <GestureHandlerRootView className="flex-1">
         <View
-          className={`flex-1 flex justify-center items-center gap-8 
+          className={`flex-1 flex justify-center items-center gap-14
           dark:bg-stone-900 bg-white
         `}>
-          <Text
-            className={`dark:text-sky-500 text-sky-300
+          <View className="flex gap-5 items-center">
+            <SectionHeader title="Zustand For State Management" />
+
+            <Text
+              className={`dark:text-sky-500 text-sky-300
           text-center font-bold text-4xl`}>
-            🧸 Count: {bears}
-          </Text>
+              🧸 Count: {bears}
+            </Text>
 
-          <View className="flex flex-row justify-center items-center w-full gap-5">
-            {/* Increase Bear Count Button */}
-            <TouchableOpacity
-              className="bg-green-200 dark:bg-green-600 px-5 py-2 rounded-[2rem]"
-              onPress={increasePopulation}>
-              <Text className="text-center dark:text-white">Increase</Text>
-            </TouchableOpacity>
+            <View className="flex flex-row justify-center items-center gap-5">
+              {/* Increase Bear Count Button */}
+              <TouchableOpacity
+                className="bg-green-200 dark:bg-green-600 px-5 py-2 rounded-[2rem]"
+                onPress={increasePopulation}>
+                <Text className="text-center dark:text-white">Increase</Text>
+              </TouchableOpacity>
 
-            {/* Decrease Bear Count Button */}
-            <TouchableOpacity
-              className="bg-red-200 dark:bg-red-600 px-5 py-2 rounded-[2rem]"
-              onPress={decreasePopulation}>
-              <Text className="text-center dark:text-white">Decrease</Text>
-            </TouchableOpacity>
+              {/* Decrease Bear Count Button */}
+              <TouchableOpacity
+                className="bg-red-200 dark:bg-red-600 px-5 py-2 rounded-[2rem]"
+                onPress={decreasePopulation}>
+                <Text className="text-center dark:text-white">Decrease</Text>
+              </TouchableOpacity>
 
-            {/* Remove All Bears Button */}
-            <TouchableOpacity
-              className="bg-gray-200 dark:bg-gray-600 px-5 py-2 rounded-[2rem]"
-              onPress={removeAllBears}>
-              <Text className="text-center dark:text-white">Reset</Text>
-            </TouchableOpacity>
+              {/* Remove All Bears Button */}
+              <TouchableOpacity
+                className="bg-gray-200 dark:bg-gray-600 px-5 py-2 rounded-[2rem]"
+                onPress={removeAllBears}>
+                <Text className="text-center dark:text-white">Reset</Text>
+              </TouchableOpacity>
+            </View>
           </View>
 
-          <View>
+          <View className="flex gap-5 justify-center">
+            <SectionHeader title="React Native Vector Icons" />
+            <View className="flex flex-row gap-5 justify-center">
+              <MaterialIcons name="rocket-launch" size={40} color="purple" />
+              <MaterialIcons name="rocket-launch" size={40} color="red" />
+              <MaterialIcons name="rocket-launch" size={40} color="orange" />
+            </View>
+          </View>
+
+          <View className="flex gap-5">
+            <SectionHeader title="React Native Paper" />
             <TextInput
               className="border-2 border-gray-300 dark:text-white rounded-[2rem] px-5 py-2"
               defaultValue={config.API_URL}
@@ -92,6 +107,14 @@ function App(): React.JSX.Element {
         </View>
       </GestureHandlerRootView>
     </SafeAreaView>
+  );
+}
+
+function SectionHeader({title}: Readonly<{title: string}>): React.JSX.Element {
+  return (
+    <Text className="px-5 border-2 border-gray-300 py-2 font-bold bg-blue-200 rounded-lg dark:bg-blue-600 dark:text-white">
+      🔵 {title} 🔵
+    </Text>
   );
 }
 
