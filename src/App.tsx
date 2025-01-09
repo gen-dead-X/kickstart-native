@@ -24,9 +24,11 @@ import {colorScheme} from 'nativewind';
 
 import {StoreState, useStore} from './store/store';
 import config from './config/config';
+import useThemeHandler from './hooks/useThemeHandler';
 
 function App(): React.JSX.Element {
-  const [isDarkMode, setIsDarkMode] = React.useState(false);
+  const {theme, setTheme} = useThemeHandler();
+
   /* Import State Hooks */
   const bears = useStore((state: StoreState) => state.bears);
   const increasePopulation = useStore(
@@ -38,38 +40,35 @@ function App(): React.JSX.Element {
   const removeAllBears = useStore((state: StoreState) => state.removeAllBears);
 
   useEffect(() => {
-    colorScheme.set(isDarkMode ? 'dark' : 'light');
-  }, [isDarkMode]);
+    colorScheme.set(theme === 'dark' ? 'dark' : 'light');
+  }, [theme]);
 
   return (
-    <SafeAreaView
-      className={`flex-1 ${isDarkMode ? 'bg-stone-900' : 'bg-white'}`}>
+    <SafeAreaView className={'flex-1 dark:bg-stone-900 bg-white'}>
       <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={isDarkMode ? 'black' : 'white'}
+        barStyle={theme === 'dark' ? 'light-content' : 'dark-content'}
+        backgroundColor={theme === 'dark' ? 'black' : 'white'}
       />
 
       <View
-        className={`flex-1 justify-center items-center gap-8 ${
-          isDarkMode ? 'bg-stone-900' : 'bg-white'
-        }`}>
+        className={`flex-1 justify-center items-center gap-8 
+          dark:bg-stone-900 bg-white
+        `}>
         {/* Theme Toggle Button */}
         <TouchableOpacity
-          className={`w-20 ${
-            isDarkMode ? 'bg-gray-700' : 'bg-blue-300'
-          } p-2 rounded-[2rem]`}
-          onPress={() => setIsDarkMode(!isDarkMode)}>
+          className={`w-20 dark:bg-gray-700 bg-blue-300
+           p-2 rounded-[2rem]`}
+          onPress={() => setTheme(theme === 'dark' ? 'light' : 'dark')}>
           <View
-            className={`h-5 w-5 rounded-full ${
-              isDarkMode ? 'ml-auto  bg-green-500' : 'bg-yellow-300'
-            }`}
+            className={`h-5 w-5 rounded-full 
+              dark:ml-auto dark:bg-green-500 bg-yellow-300
+            `}
           />
         </TouchableOpacity>
 
         <Text
-          className={`${
-            isDarkMode ? 'text-sky-200' : 'text-sky-700'
-          } text-center font-bold text-4xl`}>
+          className={`dark:text-sky-200' text-sky-700
+          text-center font-bold text-4xl`}>
           🧸 Count: {bears}
         </Text>
 
