@@ -52,7 +52,7 @@ export default function ThemeToggler() {
 
       <BottomSheet
         ref={bottomSheetRef}
-        enableDynamicSizing
+        snapPoints={['50%']}
         enablePanDownToClose
         index={-1}
         onChange={handleSheetChanges}>

@@ -2,6 +2,7 @@ import {colorScheme} from 'nativewind';
 import {useEffect} from 'react';
 import {Appearance} from 'react-native';
 import {useStore, StoreState} from '../store/store';
+import storage from '../storage/storage';
 
 type Theme = 'light' | 'dark' | 'system';
 
@@ -10,21 +11,40 @@ export default function useThemeHandler() {
   const setTheme = useStore((state: StoreState) => state.setTheme);
 
   useEffect(() => {
-    const handleThemeChange = (newTheme: Theme) => {
-      if (newTheme === 'system') {
+    const savedTheme = storage.getString('theme') as Theme;
+    if (savedTheme) {
+      if (savedTheme === 'system') {
         const systemTheme = Appearance.getColorScheme();
-        setTheme(systemTheme === 'dark' ? 'dark' : 'light');
+        colorScheme.set(systemTheme || 'light');
       } else {
-        setTheme(newTheme);
+        colorScheme.set(savedTheme);
       }
+      setTheme(savedTheme);
+    } else {
+      const systemTheme = Appearance.getColorScheme();
+      setTheme('system');
+      colorScheme.set(systemTheme || 'light');
+    }
+  }, []);
+
+  // Handle theme changes
+  useEffect(() => {
+    const handleThemeChange = () => {
+      if (theme === 'system') {
+        const systemTheme = Appearance.getColorScheme();
+        colorScheme.set(systemTheme || 'light');
+      } else {
+        colorScheme.set(theme);
+      }
+      storage.set('theme', theme);
     };
 
-    handleThemeChange(theme);
+    handleThemeChange();
 
     const listener = Appearance.addChangeListener(
-      ({colorScheme: themeColorScheme}) => {
+      ({colorScheme: newColorScheme}) => {
         if (theme === 'system') {
-          setTheme(themeColorScheme === 'dark' ? 'dark' : 'light');
+          colorScheme.set(newColorScheme || 'light');
         }
       },
     );
@@ -32,14 +52,7 @@ export default function useThemeHandler() {
     return () => {
       listener.remove();
     };
-  }, [theme, setTheme]);
-
-  useEffect(() => {
-    colorScheme.set(theme === 'dark' ? 'dark' : 'light');
   }, [theme]);
 
-  return {
-    theme,
-    setTheme,
-  };
+  return {theme, setTheme};
 }
