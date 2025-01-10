@@ -38,7 +38,7 @@ export default function ThemeToggler() {
     <>
       <TouchableOpacity
         onPress={openBottomSheet}
-        className="px-4 py-2 bg-blue-200 rounded-full dark:bg-blue-500">
+        className="rounded-full bg-blue-200 px-4 py-2 dark:bg-blue-500">
         <Text className="dark:text-white">Change Theme</Text>
       </TouchableOpacity>
 

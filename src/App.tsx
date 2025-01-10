@@ -44,7 +44,7 @@ function App(): React.JSX.Element {
 
   return (
     <AppProvider>
-      <SafeAreaView className={'flex-1 dark:bg-stone-900 bg-white'}>
+      <SafeAreaView className={'flex-1 bg-white dark:bg-stone-900'}>
         <StatusBar
           barStyle={theme === 'dark' ? 'light-content' : 'dark-content'}
           backgroundColor={theme === 'dark' ? 'black' : 'white'}
@@ -52,45 +52,44 @@ function App(): React.JSX.Element {
 
         <GestureHandlerRootView className="flex-1">
           <View
-            className={`flex-1 flex justify-center items-center gap-14
-          dark:bg-stone-900 bg-white
-        `}>
-            <View className="flex gap-5 items-center">
+            className={
+              'flex flex-1 items-center justify-center gap-14 bg-white dark:bg-stone-900'
+            }>
+            <View className="flex items-center gap-5">
               <SectionHeader title="Zustand For State Management" />
 
               <Text
-                className={`dark:text-sky-500 text-sky-300
-          text-center font-bold text-4xl`}>
+                className={`text-center text-4xl font-bold text-sky-300 dark:text-sky-500`}>
                 🧸 Count: {bears}
               </Text>
 
-              <View className="flex flex-row justify-center items-center gap-5">
+              <View className="flex flex-row items-center justify-center gap-5">
                 {/* Increase Bear Count Button */}
                 <TouchableOpacity
-                  className="bg-green-200 dark:bg-green-600 px-5 py-2 rounded-[2rem]"
+                  className="rounded-[2rem] bg-green-200 px-5 py-2 dark:bg-green-600"
                   onPress={increasePopulation}>
                   <Text className="text-center dark:text-white">Increase</Text>
                 </TouchableOpacity>
 
                 {/* Decrease Bear Count Button */}
                 <TouchableOpacity
-                  className="bg-red-200 dark:bg-red-600 px-5 py-2 rounded-[2rem]"
+                  className="rounded-[2rem] bg-red-200 px-5 py-2 dark:bg-red-600"
                   onPress={decreasePopulation}>
                   <Text className="text-center dark:text-white">Decrease</Text>
                 </TouchableOpacity>
 
                 {/* Remove All Bears Button */}
                 <TouchableOpacity
-                  className="bg-gray-200 dark:bg-gray-600 px-5 py-2 rounded-[2rem]"
+                  className="rounded-[2rem] bg-gray-200 px-5 py-2 dark:bg-gray-600"
                   onPress={removeAllBears}>
                   <Text className="text-center dark:text-white">Reset</Text>
                 </TouchableOpacity>
               </View>
             </View>
 
-            <View className="flex gap-5 justify-center">
+            <View className="flex justify-center gap-5">
               <SectionHeader title="React Native Vector Icons" />
-              <View className="flex flex-row gap-5 justify-center">
+              <View className="flex flex-row justify-center gap-5">
                 <MaterialIcons name="rocket-launch" size={40} color="purple" />
                 <MaterialIcons name="rocket-launch" size={40} color="red" />
                 <MaterialIcons name="rocket-launch" size={40} color="orange" />
@@ -118,7 +117,7 @@ function App(): React.JSX.Element {
 
 function SectionHeader({title}: Readonly<{title: string}>): React.JSX.Element {
   return (
-    <Text className="px-5 border-2 border-gray-300 py-2 font-bold bg-blue-200 rounded-lg dark:bg-blue-600 dark:text-white">
+    <Text className="rounded-lg border-2 border-gray-300 bg-blue-200 px-5 py-2 font-bold dark:bg-blue-600 dark:text-white">
       🔵 {title} 🔵
     </Text>
   );
