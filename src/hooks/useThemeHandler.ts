@@ -32,7 +32,7 @@ export default function useThemeHandler() {
     return () => {
       listener.remove();
     };
-  }, [theme]);
+  }, [theme, setTheme]);
 
   useEffect(() => {
     colorScheme.set(theme === 'dark' ? 'dark' : 'light');

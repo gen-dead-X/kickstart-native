@@ -2,7 +2,6 @@ import React, {useCallback, useRef, useState} from 'react';
 import {
   Text,
   StyleSheet,
-  Pressable,
   View,
   TouchableWithoutFeedback,
   TouchableOpacity,
@@ -17,11 +16,13 @@ export default function ThemeToggler() {
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
   const {theme, setTheme} = useThemeHandler();
 
-  const handleThemeSelect = useCallback((option: ThemeOption) => {
-    console.log({option: option});
-    setTheme(option);
-    bottomSheetRef.current?.close();
-  }, []);
+  const handleThemeSelect = useCallback(
+    (option: ThemeOption) => {
+      setTheme(option);
+      bottomSheetRef.current?.close();
+    },
+    [setTheme],
+  );
 
   const openBottomSheet = useCallback(() => {
     bottomSheetRef.current?.expand();

@@ -19,7 +19,9 @@ export default function ZustandDemo() {
       <SectionHeader title="Zustand For State Management" />
 
       <Text
-        className={`text-center text-4xl font-bold text-sky-300 dark:text-sky-500`}>
+        className={
+          'text-center text-4xl font-bold text-sky-300 dark:text-sky-500'
+        }>
         🧸 Count: {bears}
       </Text>
 
