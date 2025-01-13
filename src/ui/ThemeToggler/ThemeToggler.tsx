@@ -1,20 +1,18 @@
-import React, {useCallback, useRef, useState} from 'react';
+import React, {useCallback, useRef} from 'react';
+import {Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {
-  Text,
-  StyleSheet,
-  View,
-  TouchableWithoutFeedback,
-  TouchableOpacity,
-} from 'react-native';
-import BottomSheet, {BottomSheetView} from '@gorhom/bottom-sheet';
+  BottomSheetBackdrop,
+  BottomSheetBackdropProps,
+  BottomSheetModal,
+  BottomSheetView,
+} from '@gorhom/bottom-sheet';
 import useThemeHandler from '../../hooks/useThemeHandler';
 import {StoreState, useStore} from '../../store/store';
 
 type ThemeOption = 'light' | 'dark' | 'system';
 
 export default function ThemeToggler() {
-  const bottomSheetRef = useRef<BottomSheet>(null);
-  const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
+  const bottomSheetRef = useRef<BottomSheetModal>(null);
   const {theme, setTheme} = useThemeHandler();
   const appTheme = useStore((state: StoreState) => state.appTheme);
 
@@ -27,15 +25,20 @@ export default function ThemeToggler() {
   );
 
   const openBottomSheet = useCallback(() => {
-    bottomSheetRef.current?.expand();
-    setIsBottomSheetOpen(true);
+    bottomSheetRef.current?.present();
   }, []);
 
-  const handleSheetChanges = useCallback((index: number) => {
-    if (index === -1) {
-      setIsBottomSheetOpen(false);
-    }
-  }, []);
+  const renderBackdrop = useCallback(
+    (props_: BottomSheetBackdropProps) => (
+      <BottomSheetBackdrop
+        {...props_}
+        pressBehavior="close"
+        opacity={0.5}
+        disappearsOnIndex={-1}
+      />
+    ),
+    [],
+  );
 
   return (
     <>
@@ -45,21 +48,14 @@ export default function ThemeToggler() {
         <Text className="dark:text-white">Change Theme</Text>
       </TouchableOpacity>
 
-      {isBottomSheetOpen && (
-        <TouchableWithoutFeedback
-          onPress={() => bottomSheetRef.current?.close()}>
-          <View style={styles.overlay} />
-        </TouchableWithoutFeedback>
-      )}
-
-      <BottomSheet
+      <BottomSheetModal
+        index={0}
+        enableDynamicSizing
+        backdropComponent={renderBackdrop}
         ref={bottomSheetRef}
-        snapPoints={['50%']}
         enablePanDownToClose
-        index={-1}
-        onChange={handleSheetChanges}
         handleIndicatorStyle={{
-          backgroundColor: appTheme === 'dark' ? 'white' : 'black',
+          backgroundColor: '#e5e7eb',
           height: 5,
           width: 80,
         }}
@@ -86,7 +82,7 @@ export default function ThemeToggler() {
             </TouchableOpacity>
           ))}
         </BottomSheetView>
-      </BottomSheet>
+      </BottomSheetModal>
     </>
   );
 }
@@ -95,6 +91,7 @@ const styles = StyleSheet.create({
   contentContainer: {
     flex: 1,
     padding: 16,
+    paddingBottom: 40,
   },
 
   title: {
