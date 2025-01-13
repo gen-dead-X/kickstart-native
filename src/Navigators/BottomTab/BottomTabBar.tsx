@@ -1,7 +1,7 @@
 import React from 'react';
 import {BottomTabBarProps} from '@react-navigation/bottom-tabs';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import {Animated, View, StyleSheet, TouchableOpacity} from 'react-native';
+import {Animated, View, TouchableOpacity} from 'react-native';
 
 export default function BottomTabBar({
   state,
@@ -78,30 +78,3 @@ export default function BottomTabBar({
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  tabBar: {
-    flexDirection: 'row',
-    backgroundColor: '#fff',
-    borderTopWidth: 1,
-    borderTopColor: '#ddd',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    position: 'absolute',
-    bottom: 20,
-    left: 20,
-    right: 20,
-    borderRadius: 30,
-    shadowColor: '#000',
-    shadowOffset: {width: 0, height: 2},
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
-    zIndex: 9,
-  },
-  tabItem: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 10,
-  },
-});

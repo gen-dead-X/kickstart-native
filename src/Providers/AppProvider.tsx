@@ -17,7 +17,7 @@ export default function AppProvider({
       <BottomSheetModalProvider>
         <PaperProvider theme={themeColors}>
           <NavigationContainer>
-            <SafeAreaView className={'flex-1 bg-white dark:bg-stone-900'}>
+            <SafeAreaView className={'flex-1 bg-white dark:bg-slate-950'}>
               <StatusBar
                 barStyle={theme === 'dark' ? 'light-content' : 'dark-content'}
                 backgroundColor={theme === 'dark' ? 'black' : 'white'}
