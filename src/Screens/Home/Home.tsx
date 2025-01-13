@@ -12,7 +12,7 @@ export default function Home() {
     <ScrollView contentContainerStyle={{flexGrow: 1}} className="flex-1">
       <View
         className={
-          'flex flex-1 items-center justify-center gap-14 bg-white dark:bg-gray-950'
+          'flex flex-1 items-center justify-center gap-14 bg-white dark:bg-gray-900'
         }>
         <ZustandDemo />
         <FormPaperInput />

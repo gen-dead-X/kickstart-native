@@ -24,7 +24,6 @@ export default function BottomTabNavigator() {
         options={{
           title: 'Home',
           tabBarLabel: 'Home',
-          tabBarIcon: HomeIcon,
         }}
         component={HomeStackNavigator}
       />
@@ -33,7 +32,3 @@ export default function BottomTabNavigator() {
     </Tab.Navigator>
   );
 }
-
-const HomeIcon = ({size, color}: {size: number; color: string}) => (
-  <MaterialIcon name="home" size={size} color={color} />
-);

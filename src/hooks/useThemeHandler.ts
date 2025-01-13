@@ -7,17 +7,23 @@ import {useMMKV} from 'react-native-mmkv';
 export default function useThemeHandler() {
   const theme = useStore((state: StoreState) => state.theme);
   const setTheme = useStore((state: StoreState) => state.setTheme);
+  const setAppTheme = useStore((state: StoreState) => state.setAppTheme);
   const storage = useMMKV();
 
   // Handle theme changes
   useEffect(() => {
     const handleThemeChange = () => {
       if (theme === 'system') {
+        console.log('Getting Color Scheme');
         const systemTheme = Appearance.getColorScheme();
-        colorScheme.set(systemTheme || 'light');
+        console.log('Set System ThemeContext', {systemTheme});
+        colorScheme.set(systemTheme ?? 'light');
+        setAppTheme(systemTheme ?? 'light');
       } else {
         colorScheme.set(theme);
+        setAppTheme(theme);
       }
+
       storage.set('theme', theme);
     };
 
@@ -26,7 +32,8 @@ export default function useThemeHandler() {
     const listener = Appearance.addChangeListener(
       ({colorScheme: newColorScheme}) => {
         if (theme === 'system') {
-          colorScheme.set(newColorScheme || 'light');
+          colorScheme.set(newColorScheme ?? 'light');
+          setAppTheme(newColorScheme ?? 'light');
         }
       },
     );
@@ -34,7 +41,7 @@ export default function useThemeHandler() {
     return () => {
       listener.remove();
     };
-  }, [theme]);
+  }, [theme, setAppTheme, storage]);
 
   return {theme, setTheme};
 }
