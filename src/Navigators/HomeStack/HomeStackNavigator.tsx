@@ -3,7 +3,6 @@ import {HomeStackParamList} from '../../types/navigator.types';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Home from '../../Screens/Home/Home';
 import NavigationDemo from '../../Screens/NavigationDemo/NavigationDemo';
-import {useMMKVString} from 'react-native-mmkv';
 import {Appearance} from 'react-native';
 import {useStore} from '../../store/store';
 
@@ -13,8 +12,6 @@ export default function HomeStackNavigator() {
   const theme = useStore(state => state.theme);
 
   function getTheme() {
-    // const theme = storage.getString('theme');
-
     if (theme === 'system') {
       const systemTheme = Appearance.getColorScheme();
       return systemTheme ?? 'light';
@@ -33,7 +30,7 @@ export default function HomeStackNavigator() {
         headerTransparent: true,
         headerTintColor: getTheme() === 'dark' ? 'white' : 'black',
         contentStyle: {
-          backgroundColor: getTheme() === 'dark' ? '#020617' : 'white',
+          backgroundColor: getTheme() === 'dark' ? '#111827' : 'white',
         },
       }}>
       <HomeStack.Screen name="Home" component={Home} />

@@ -12,6 +12,7 @@ export default function AppNavigator() {
       <RootStack.Screen
         options={{
           headerShown: false,
+          contentStyle: {backgroundColor: 'transparent'},
         }}
         name="BottomTab"
         component={BottomTabNavigator}

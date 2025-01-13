@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import BottomSheet, {BottomSheetView} from '@gorhom/bottom-sheet';
 import useThemeHandler from '../../hooks/useThemeHandler';
+import {StoreState, useStore} from '../../store/store';
 
 type ThemeOption = 'light' | 'dark' | 'system';
 
@@ -15,6 +16,7 @@ export default function ThemeToggler() {
   const bottomSheetRef = useRef<BottomSheet>(null);
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
   const {theme, setTheme} = useThemeHandler();
+  const appTheme = useStore((state: StoreState) => state.appTheme);
 
   const handleThemeSelect = useCallback(
     (option: ThemeOption) => {
@@ -55,16 +57,32 @@ export default function ThemeToggler() {
         snapPoints={['50%']}
         enablePanDownToClose
         index={-1}
-        onChange={handleSheetChanges}>
-        <BottomSheetView style={styles.contentContainer}>
-          <Text style={styles.title}>Select Theme</Text>
+        onChange={handleSheetChanges}
+        handleIndicatorStyle={{
+          backgroundColor: appTheme === 'dark' ? 'white' : 'black',
+          height: 5,
+          width: 80,
+        }}
+        handleStyle={{
+          backgroundColor: appTheme === 'dark' ? '#1e293b' : 'white',
+          borderTopLeftRadius: 12,
+          borderTopRightRadius: 12,
+        }}>
+        <BottomSheetView
+          style={styles.contentContainer}
+          className={'dark:bg-slate-800'}>
+          <Text style={styles.title} className={'dark:text-white'}>
+            Select Theme
+          </Text>
           {(['light', 'dark', 'system'] as Array<ThemeOption>).map(option => (
             <TouchableOpacity
               key={option}
               style={[styles.option]}
-              className={`${option === theme ? 'bg-blue-200' : 'bg-gray-200'}`}
+              className={`${option === theme ? 'bg-blue-200 dark:bg-blue-600' : 'bg-gray-200 dark:bg-slate-700'}`}
               onPress={() => handleThemeSelect(option)}>
-              <Text style={styles.optionText}>{option}</Text>
+              <Text style={styles.optionText} className="dark:text-white">
+                {option}
+              </Text>
             </TouchableOpacity>
           ))}
         </BottomSheetView>

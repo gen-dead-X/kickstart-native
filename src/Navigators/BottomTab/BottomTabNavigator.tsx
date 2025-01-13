@@ -17,6 +17,14 @@ export default function BottomTabNavigator() {
       screenOptions={{
         animation: 'shift',
         headerShown: false,
+        tabBarStyle: {
+          backgroundColor: 'transparent',
+          elevation: 0,
+          borderTopWidth: 0,
+        },
+        sceneStyle: {
+          backgroundColor: 'transparent',
+        },
       }}
       initialRouteName="BottomHome">
       <Tab.Screen
