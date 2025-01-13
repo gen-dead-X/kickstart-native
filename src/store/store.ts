@@ -1,4 +1,5 @@
 import {create} from 'zustand';
+import storage from '../storage/storage';
 
 type Bear = {
   bears: number;
@@ -18,7 +19,7 @@ export type StoreState = {
 
 export const useStore = create<StoreState>(set => ({
   bears: 0,
-  theme: 'light',
+  theme: (storage.getString('theme') as Theme) || 'system',
   setTheme: (theme: Theme) => set({theme}),
   increasePopulation: () => set((state: Bear) => ({bears: state.bears + 1})),
   decreasePopulation: () => set((state: Bear) => ({bears: state.bears - 1})),

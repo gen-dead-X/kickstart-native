@@ -2,30 +2,12 @@ import {colorScheme} from 'nativewind';
 import {useEffect} from 'react';
 import {Appearance} from 'react-native';
 import {useStore, StoreState} from '../store/store';
-import storage from '../storage/storage';
-
-type Theme = 'light' | 'dark' | 'system';
+import {useMMKV} from 'react-native-mmkv';
 
 export default function useThemeHandler() {
   const theme = useStore((state: StoreState) => state.theme);
   const setTheme = useStore((state: StoreState) => state.setTheme);
-
-  useEffect(() => {
-    const savedTheme = storage.getString('theme') as Theme;
-    if (savedTheme) {
-      if (savedTheme === 'system') {
-        const systemTheme = Appearance.getColorScheme();
-        colorScheme.set(systemTheme || 'light');
-      } else {
-        colorScheme.set(savedTheme);
-      }
-      setTheme(savedTheme);
-    } else {
-      const systemTheme = Appearance.getColorScheme();
-      setTheme('system');
-      colorScheme.set(systemTheme || 'light');
-    }
-  }, []);
+  const storage = useMMKV();
 
   // Handle theme changes
   useEffect(() => {
