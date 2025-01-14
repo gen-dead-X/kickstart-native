@@ -4,7 +4,7 @@ A modern, opinionated and scalable React Native boilerplate to kickstart your ne
 
 ## 📱 Screenshots
 
-<div align="center">
+<div align="center" style="display: flex; gap: 1rem;">
    <img src="./src/assets/dark_snap.png" alt="Dark Theme" width="300"/>
    <img src="./src/assets/light_snap.png" alt="Light Theme" width="300"/>
 </div>
