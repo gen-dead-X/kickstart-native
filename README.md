@@ -2,6 +2,13 @@
 
 A modern, opinionated and scalable React Native boilerplate to kickstart your next mobile application.
 
+## 📱 Screenshots
+
+<div align="center">
+   <img src="./src/assets/dark_snap.png" alt="Dark Theme" width="300"/>
+   <img src="./src/assets/light_snap.png" alt="Light Theme" width="300"/>
+</div>
+
 ## 🚀 Quick Start
 
 ```bash
